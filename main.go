@@ -65,21 +65,21 @@ func main() {
 	log.Println("Server running on port", port)
 
 	c := cors.New(cors.Options{
-	AllowedOrigins: []string{
-		"http://localhost:3000",
-	},
-	AllowedMethods: []string{
-		"GET",
-		"POST",
-		"PUT",
-		"DELETE",
-	},
-	AllowedHeaders: []string{
-		"*",
-	},
-})
+		AllowedOrigins: []string{
+			"http://localhost:3000",
+		},
+		AllowedMethods: []string{
+			"GET",
+			"POST",
+			"PUT",
+			"DELETE",
+		},
+		AllowedHeaders: []string{
+			"*",
+		},
+	})
 
-handler := c.Handler(r)
+	handler := c.Handler(r)
 
-log.Fatal(http.ListenAndServe(":"+port, handler))
+	log.Fatal(http.ListenAndServe(":"+port, handler))
 }
