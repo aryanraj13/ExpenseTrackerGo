@@ -13,6 +13,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -63,5 +64,22 @@ func main() {
 
 	log.Println("Server running on port", port)
 
-	log.Fatal(http.ListenAndServe(":"+port, r))
+	c := cors.New(cors.Options{
+	AllowedOrigins: []string{
+		"http://localhost:3000",
+	},
+	AllowedMethods: []string{
+		"GET",
+		"POST",
+		"PUT",
+		"DELETE",
+	},
+	AllowedHeaders: []string{
+		"*",
+	},
+})
+
+handler := c.Handler(r)
+
+log.Fatal(http.ListenAndServe(":"+port, handler))
 }
