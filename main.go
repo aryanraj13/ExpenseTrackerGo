@@ -60,6 +60,114 @@ func main() {
 		middleware.JWTAuth(http.HandlerFunc(handlers.GetExpenseSummary)),
 	).Methods("GET")
 
+	r.Handle(
+		"/dashboard",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetDashboardStats,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/analytics/categories",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetCategoryAnalytics,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/analytics/trends",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetMonthlyTrends,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/transactions",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.CreateTransaction,
+			),
+		),
+	).Methods("POST")
+
+	r.Handle(
+		"/transactions",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetTransactions,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/transactions/{id}",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.DeleteTransaction,
+			),
+		),
+	).Methods("DELETE")
+
+	r.Handle(
+		"/accounts",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.CreateAccount,
+			),
+		),
+	).Methods("POST")
+
+	r.Handle(
+		"/accounts",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetAccounts,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/categories",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.CreateCategory,
+			),
+		),
+	).Methods("POST")
+
+	r.Handle(
+		"/categories",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetCategories,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/profile",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.GetProfile,
+			),
+		),
+	).Methods("GET")
+
+	r.Handle(
+		"/profile",
+		middleware.JWTAuth(
+			http.HandlerFunc(
+				handlers.UpdateProfile,
+			),
+		),
+	).Methods("PUT")
+
 	port := os.Getenv("PORT")
 
 	log.Println("Server running on port", port)
